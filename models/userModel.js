@@ -19,7 +19,7 @@ const userSchema = new Schema(
     },
     token: String,
   },
-  { versionKey: false, timestamps: true }
+  { versionKey: false, timestamps: true },
 );
 
 userSchema.pre("save", async function (next) {
@@ -31,7 +31,6 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-userSchema.methods.checkPassword = (candidate, passwordHash) =>
-  compare(candidate, passwordHash);
+userSchema.methods.checkPassword = (candidate, passwordHash) => compare(candidate, passwordHash);
 
 export const User = model("User", userSchema);
