@@ -53,7 +53,7 @@ describe("test POST /users/login", () => {
       expect.objectContaining({
         token: expect.any(String),
         user: expect.any(Object),
-      })
+      }),
     );
   });
 });

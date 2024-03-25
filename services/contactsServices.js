@@ -45,7 +45,7 @@ async function updateStatusContact(id, contactStatus) {
   const updatedStatusContact = await Contact.findByIdAndUpdate(
     id,
     contactStatus,
-    { new: true }
+    { new: true },
   );
 
   return updatedStatusContact;

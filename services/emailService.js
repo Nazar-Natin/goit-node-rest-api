@@ -32,7 +32,7 @@ export class Email {
       {
         url: this.url,
         subject,
-      }
+      },
     );
 
     const emailConfig = {

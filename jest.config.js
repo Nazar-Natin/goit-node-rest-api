@@ -1,5 +1,5 @@
 export default {
   transform: {
-    "^.+\\.m?js$": "babel-jest",
+    '^.+\\.m?js$': 'babel-jest',
   },
 };

@@ -58,7 +58,7 @@ async function updateAvatar(user, file) {
         width: 250,
         height: 250,
       },
-      "avatars"
+      "avatars",
     );
   }
 

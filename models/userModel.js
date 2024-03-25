@@ -28,7 +28,7 @@ const userSchema = new Schema(
       type: String,
     },
   },
-  { versionKey: false, timestamps: true }
+  { versionKey: false, timestamps: true },
 );
 
 userSchema.pre("save", async function (next) {
