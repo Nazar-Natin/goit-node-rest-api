@@ -44,7 +44,7 @@ export const updateContactSchema = Joi.object({
 
 export const updateStatusContactSchema = Joi.object({
   favorite: Joi.boolean().required().messages({
-    "any.required": "Favorite is required",
-    "boolean.base": "Favorite must be a boolean value",
+      "any.required": "Favorite is required",
+      "boolean.base": "Favorite must be a boolean value",
   }),
 });

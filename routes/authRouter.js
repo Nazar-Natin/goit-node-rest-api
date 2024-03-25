@@ -1,16 +1,6 @@
 import express from "express";
-import {
-  registerUser,
-  loginUser,
-  getCurrentUser,
-  logoutUser,
-  updateUserAvatar,
-} from "../controllers/authControllers.js";
-import {
-  checkRegisterData,
-  checkLoginData,
-  protect,
-} from "../middlewares/authMiddleware.js";
+import { registerUser, loginUser, getCurrentUser, logoutUser, updateUserAvatar } from "../controllers/authControllers.js";
+import { checkRegisterData, checkLoginData, protect } from "../middlewares/authMiddleware.js";
 import { uploadAvatar } from "../middlewares/userMiddleware.js";
 
 const authRouter = express.Router();

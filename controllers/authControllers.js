@@ -43,7 +43,7 @@ export const logoutUser = catchAsync(async (req, res) => {
 
 export const updateUserAvatar = catchAsync(async (req, res) => {
   const { avatarURL } = await updateAvatar(req.user, req.file);
-
+ 
   res.status(200).json({
     avatarURL,
   });
