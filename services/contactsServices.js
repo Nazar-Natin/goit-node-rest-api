@@ -1,4 +1,3 @@
-// contactsServices.js
 import { Contact } from "../models/contactModel.js";
 
 async function listContacts(query, owner) {
@@ -35,9 +34,7 @@ async function updateContact(id, contactData, owner) {
   const updatedContact = await Contact.findOneAndUpdate(
     { _id: id, owner },
     contactData,
-    {
-      new: true,
-    }
+    { new: true }
   );
   return updatedContact;
 }

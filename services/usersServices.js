@@ -1,6 +1,6 @@
 import { User } from "../models/userModel.js";
-import { signToken } from "../services/jwtService.js";
 import HttpError from "../helpers/HttpError.js";
+import { signToken } from "../services/jwtService.js";
 
 async function signup(userData) {
   const newUser = await User.create(userData);
