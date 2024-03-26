@@ -1,3 +1,4 @@
+// contactsServices.js
 import { Contact } from "../models/contactModel.js";
 
 async function listContacts(query, owner) {
@@ -15,39 +16,38 @@ async function listContacts(query, owner) {
   return { total, contacts };
 }
 
-async function getContactById(id) {
-  const contact = await Contact.findById(id);
-
+async function getContactById(id, owner) {
+  const contact = await Contact.findOne({ _id: id, owner });
   return contact;
 }
 
-async function removeContact(id) {
-  const removedContact = await Contact.findByIdAndDelete(id);
-
+async function removeContact(id, owner) {
+  const removedContact = await Contact.findOneAndDelete({ _id: id, owner });
   return removedContact;
 }
 
 async function addContact(contactData, owner) {
   const newContact = await Contact.create({ ...contactData, owner });
-
   return newContact;
 }
 
-async function updateContact(id, contactData) {
-  const updatedContact = await Contact.findByIdAndUpdate(id, contactData, {
-    new: true,
-  });
-
+async function updateContact(id, contactData, owner) {
+  const updatedContact = await Contact.findOneAndUpdate(
+    { _id: id, owner },
+    contactData,
+    {
+      new: true,
+    }
+  );
   return updatedContact;
 }
 
-async function updateStatusContact(id, contactStatus) {
-  const updatedStatusContact = await Contact.findByIdAndUpdate(
-    id,
+async function updateStatusContact(id, contactStatus, owner) {
+  const updatedStatusContact = await Contact.findOneAndUpdate(
+    { _id: id, owner },
     contactStatus,
-    { new: true },
+    { new: true }
   );
-
   return updatedStatusContact;
 }
 
