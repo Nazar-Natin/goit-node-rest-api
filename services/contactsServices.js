@@ -16,13 +16,15 @@ async function listContacts(query, owner) {
 }
 
 async function getContactById(id, owner) {
-  const contact = await Contact.findOne({ _id: id, owner });
+  const contact = await Contact.findOne({ _id: id, owner }, { lean: true });
   return contact;
 }
 
 async function removeContact(id, owner) {
-  const removedContact = await Contact.findOneAndDelete({ _id: id, owner });
-  return removedContact;
+  const contact = await Contact.findOne({ _id: id, owner }, { lean: true });
+
+  await Contact.findOneAndDelete({ _id: id, owner });
+  return contact;
 }
 
 async function addContact(contactData, owner) {
@@ -31,12 +33,10 @@ async function addContact(contactData, owner) {
 }
 
 async function updateContact(id, contactData, owner) {
-  const updatedContact = await Contact.findOneAndUpdate(
-    { _id: id, owner },
-    contactData,
-    { new: true }
-  );
-  return updatedContact;
+  const contact = await Contact.findOne({ _id: id, owner }, { lean: true });
+
+  await Contact.findOneAndUpdate({ _id: id, owner }, contactData);
+  return contact;
 }
 
 async function updateStatusContact(id, contactStatus, owner) {
