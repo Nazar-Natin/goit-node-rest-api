@@ -20,20 +20,18 @@ const contactsRouter = express.Router();
 
 contactsRouter.use(protect);
 
-contactsRouter.use("/:id", checkContactId);
-
-contactsRouter.use("/:id", checkOwner);
-
 contactsRouter.get("/", getAllContacts);
 
-contactsRouter.get("/:id", getOneContact);
+contactsRouter.get("/:id", checkContactId, getOneContact);
 
-contactsRouter.delete("/:id", deleteContact);
+contactsRouter.delete("/:id", checkContactId, deleteContact);
 
 contactsRouter.post("/", checkCreateContactData, createContact);
 
 contactsRouter.put("/:id", checkUpdateContactData, updateOneContact);
 
 contactsRouter.patch("/:id/favorite", checkUpdateStatus, updateStatus);
+
+contactsRouter.use("/:id", checkOwner);
 
 export default contactsRouter;
