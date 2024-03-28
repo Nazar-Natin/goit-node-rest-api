@@ -5,7 +5,7 @@ async function listContacts(query, owner) {
   const limit = query.limit ? +query.limit : 5;
   const docsToSkip = (page - 1) * limit;
 
-  const filter = { owner };
+  const filter = { owner: owner._id };
 
   if (query.favorite) filter.favorite = query.favorite;
 
@@ -16,32 +16,41 @@ async function listContacts(query, owner) {
 }
 
 async function getContactById(id, owner) {
-  const contact = await Contact.findOne({ _id: id, owner });
+  const contact = await Contact.findOne(
+    { _id: id, owner: owner._id },
+    { lean: true }
+  );
   return contact;
 }
 
 async function removeContact(id, owner) {
-  const removedContact = await Contact.findOneAndDelete({ _id: id, owner });
-  return removedContact;
+  const contact = await Contact.findOne(
+    { _id: id, owner: owner._id },
+    { lean: true }
+  );
+
+  await Contact.findOneAndDelete({ _id: id, owner: owner._id });
+  return contact;
 }
 
 async function addContact(contactData, owner) {
-  const newContact = await Contact.create({ ...contactData, owner });
+  const newContact = await Contact.create({ ...contactData, owner: owner._id });
   return newContact;
 }
 
 async function updateContact(id, contactData, owner) {
-  const updatedContact = await Contact.findOneAndUpdate(
-    { _id: id, owner },
-    contactData,
-    { new: true }
+  const contact = await Contact.findOne(
+    { _id: id, owner: owner._id },
+    { lean: true }
   );
-  return updatedContact;
+
+  await Contact.findOneAndUpdate({ _id: id, owner: owner._id }, contactData);
+  return contact;
 }
 
 async function updateStatusContact(id, contactStatus, owner) {
   const updatedStatusContact = await Contact.findOneAndUpdate(
-    { _id: id, owner },
+    { _id: id, owner: owner._id },
     contactStatus,
     { new: true }
   );
